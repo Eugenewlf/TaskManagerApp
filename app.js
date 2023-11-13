@@ -132,99 +132,82 @@ app.get('/dash', async (req, res) => {
   }
 });
 
-app.get('/createTask', (req, res) => {
-  res.render('createTask');
-});
-
-app.post('/createTask', async (req, res) => {
-  const { name, description, dueDate } = req.body;
-
+app.get('/api/tasks', async (req, res) => {
   try {
-    const userId = req.session.userid.toString();
-    await Task.create({ name, description, dueDate, owner: req.session.userid });
-    res.redirect('/tasks');
+    const tasks = await Task.find({ owner: req.session.userid });
+    res.json(tasks);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.get('/updateTask/:taskId', async (req, res) => {
-  if (!req.session.authenticated) {
-    return res.redirect('/login');
-  }
-
+app.get('/api/tasks/:taskId', async (req, res) => {
   const taskId = req.params.taskId;
 
   try {
     const task = await Task.findOne({ _id: taskId, owner: req.session.userid });
-    res.render('updateTask', { task });
+
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json(task);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.post('/updateTask/:taskId', async (req, res) => {
-  if (!req.session.authenticated) {
-    return res.redirect('/login');
-  }
+app.post('/api/tasks', async (req, res) => {
+  const { name, description, dueDate } = req.body;
 
+  try {
+    const userId = req.session.userid.toString();
+    const newTask = await Task.create({ name, description, dueDate, owner: req.session.userid });
+    res.status(201).json(newTask);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.put('/api/tasks/:taskId', async (req, res) => {
   const taskId = req.params.taskId;
   const { name, description, dueDate } = req.body;
 
   try {
-    await Task.updateOne(
+    const updatedTask = await Task.findOneAndUpdate(
       { _id: taskId, owner: req.session.userid },
-      { $set: { name, description, dueDate } }
+      { $set: { name, description, dueDate } },
+      { new: true }
     );
-    res.redirect('/tasks');
+
+    if (!updatedTask) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json(updatedTask);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.post('/deleteTask/:id', async (req, res) => {
-  const taskId = req.params.id;
+app.delete('/api/tasks/:taskId', async (req, res) => {
+  const taskId = req.params.taskId;
 
   try {
-    await Task.deleteOne({ _id: taskId, owner: req.session.userid });
-    res.redirect('/tasks');
+    const deletedTask = await Task.findOneAndDelete({ _id: taskId, owner: req.session.userid });
+
+    if (!deletedTask) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json({ message: 'Task deleted successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-app.get('/searchTasks', async (req, res) => {
-  const query = req.query.q || '';
-
-  try {
-    const tasks = await Task.find({
-      owner: req.session.userid,
-      $or: [
-        { name: { $regex: new RegExp(query, 'i') } },
-        { description: { $regex: new RegExp(query, 'i') } },
-      ],
-    });
-
-    res.render('tasks', { tasks, searchQuery: query });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-app.get('/tasks', async (req, res) => {
-  const query = req.query.q || '';
-
-  try {
-    const tasks = await Task.find({ owner: req.session.userid });
-    res.render('tasks', { tasks, searchQuery: query });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
