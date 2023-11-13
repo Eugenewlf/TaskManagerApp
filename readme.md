@@ -1,14 +1,17 @@
-# Task Manager App
+Task Manager App
 
-Application Link: [Your Application Link](https://your-app-render-url.com/)
+Group: 11
+Name: 
+Long Fung Eugene Wu (12781706)
 
----
+Application Link: https://s381f-taskmanager.onrender.com/
 
-To access the Task Manager App, users need to log in by entering their username and password.
+********************************************
+
+User Authentication
+To access the Task Manager App, users need to register before log in by entering their username and password.
 
 Each user has a userID and password:
-
-```json
 [
 	{ "userid": "user1", "password": "cs381" },
 	{ "userid": "user2", "password": "cs381" },
@@ -17,9 +20,9 @@ Each user has a userID and password:
 After a successful login, the userid is stored in the session.
 
 Logout
-Users can log out of their accounts by clicking on the logout button on the home page.
+Users can log out of their accounts by clicking on the logout button on the dashboard page.
 
-CRUD Service
+CRUD Service - 
 Create
 A task document may contain the following attributes:
 
@@ -31,18 +34,16 @@ Task Name and Task Description are mandatory, and Due Date is optional.
 The create operation is a POST request, and all information is in the body of the request.
 
 Read
-There are two options for reading and finding tasks: list all information or searching by task id.
+There are two options for reading and finding tasks: list all information or searching by task names.
 
 List all information:
+Display all tasks.
 
-Display all task IDs.
-Clicking on a task ID will show the details.
-Searching by task id:
+Searching by task name:
+Input the task name of the task you want to find.
 
-Input the task id of the task you want to find.
-Clicking on the task ID in the display will show the details.
 Update
-Users can update task information through the details interface. Task ID cannot be changed.
+Users can update task information through the details interface. Task name cannot be changed.
 
 A task document may contain the following attributes:
 
@@ -60,16 +61,16 @@ This project supports three HTTP request types: POST, GET, and DELETE.
 POST:
 
 Used for insertion.
-Path URL: /api/task/taskID/:taskID
-Test: curl -X POST -H "Content-Type: application/json" --data '{"name": "New Task", "taskID":"00000001"}' http://localhost:3000/api/task/taskID/00000001
+Path URL: /api/tasks
+Test: curl -X POST -H "Content-Type: application/json" --data '{"name": "New Task", "description": "Task description", "dueDate": "2023-12-31"}' https://s381f-taskmanager.onrender.com/api/tasks
 GET:
 
 Used for finding.
-Path URL: /api/task/taskID/:taskID
-Test: curl -X GET http://localhost:3000/api/task/taskID/00000001
+Path URL: /api/tasks/:taskId
+Test: curl -X GET https://s381f-taskmanager.onrender.com/api/tasks/00000001
 DELETE:
 
 Used for deletion.
-Path URL: /api/task/taskID/:taskID
-Test: curl -X DELETE http://localhost:3000/api/task/taskID/00000001
+Path URL: /api/tasks/:taskId
+Test: curl -X DELETE https://s381f-taskmanager.onrender.com/api/tasks/00000001
 For all RESTful CRUD services, login should be done first.
