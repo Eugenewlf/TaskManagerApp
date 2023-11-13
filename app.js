@@ -23,6 +23,7 @@ mongoose.connect('mongodb+srv://eugenewlf:Ew25805863@cluster0.u1mqfar.mongodb.ne
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
+  tlsAllowInvalidCertificates: true,
 });
 
 const db = mongoose.connection;
