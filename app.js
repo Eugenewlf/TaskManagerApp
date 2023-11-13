@@ -132,6 +132,102 @@ app.get('/dash', async (req, res) => {
   }
 });
 
+app.get('/createTask', (req, res) => {
+  res.render('createTask');
+});
+
+app.post('/createTask', async (req, res) => {
+  const { name, description, dueDate } = req.body;
+
+  try {
+    const userId = req.session.userid.toString();
+    await Task.create({ name, description, dueDate, owner: req.session.userid });
+    res.redirect('/tasks');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/updateTask/:taskId', async (req, res) => {
+  if (!req.session.authenticated) {
+    return res.redirect('/login');
+  }
+
+  const taskId = req.params.taskId;
+
+  try {
+    const task = await Task.findOne({ _id: taskId, owner: req.session.userid });
+    res.render('updateTask', { task });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.post('/updateTask/:taskId', async (req, res) => {
+  if (!req.session.authenticated) {
+    return res.redirect('/login');
+  }
+
+  const taskId = req.params.taskId;
+  const { name, description, dueDate } = req.body;
+
+  try {
+    await Task.updateOne(
+      { _id: taskId, owner: req.session.userid },
+      { $set: { name, description, dueDate } }
+    );
+    res.redirect('/tasks');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.post('/deleteTask/:id', async (req, res) => {
+  const taskId = req.params.id;
+
+  try {
+    await Task.deleteOne({ _id: taskId, owner: req.session.userid });
+    res.redirect('/tasks');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/searchTasks', async (req, res) => {
+  const query = req.query.q || '';
+
+  try {
+    const tasks = await Task.find({
+      owner: req.session.userid,
+      $or: [
+        { name: { $regex: new RegExp(query, 'i') } },
+        { description: { $regex: new RegExp(query, 'i') } },
+      ],
+    });
+
+    res.render('tasks', { tasks, searchQuery: query });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/tasks', async (req, res) => {
+  const query = req.query.q || '';
+
+  try {
+    const tasks = await Task.find({ owner: req.session.userid });
+    res.render('tasks', { tasks, searchQuery: query });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 app.get('/api/tasks', async (req, res) => {
   try {
     const tasks = await Task.find({ owner: req.session.userid });
