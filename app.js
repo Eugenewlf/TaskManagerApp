@@ -19,9 +19,16 @@ app.use(session({
   saveUninitialized: true
 }));
 
-mongoose.connect('mongodb://localhost:27017/task_manager_db', {
+mongoose.connect('mongodb+srv://eugenewlf:Ew25805863@cluster0.u1mqfar.mongodb.net/TMDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {
+  console.log('Connected to MongoDB');
 });
 
 const saltRounds = 10;
@@ -43,7 +50,6 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 app.use((req, res, next) => {
-  const db = mongoose.connection;
   req.userDb = db.collection('users');
   next();
 });
