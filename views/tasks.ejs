@@ -1,0 +1,51 @@
+<!-- views/tasks.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Register</title>
+    <link rel="stylesheet" href="/styles/main.css">
+  </head>
+
+<body>
+  <h2>Your Tasks</h2>
+
+  <form action="/searchTasks" method="GET">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="q" placeholder="Enter your search query">
+    <button type="submit">Search</button>
+  </form>
+
+  <% if (searchQuery) { %>
+    <p>Search Results for: <%= searchQuery %></p>
+  <% } %>
+
+  <% if (tasks.length > 0) { %>
+    <ul>
+      <% tasks.forEach(task => { %>
+        <li>
+          <strong><%= task.name %></strong>
+          <p><%= task.description %></p>
+          <p>Due Date: <%= task.dueDate.toISOString().split('T')[0] %></p>
+
+          <a href="/updateTask/<%= task._id %>">Update</a>
+
+          <form action="/deleteTask/<%= task._id %>" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      <% }) %>
+      
+    </ul>
+  <% } else { %>
+    <p>No tasks found.</p>
+  <% } %>
+
+  <p><a href="/createTask">Create Task</a></p>
+  <p><a href="/dash">Back to Dashboard</a></p>
+  <p><a href="/logout">Logout</a></p>
+</body>
+
+</html>

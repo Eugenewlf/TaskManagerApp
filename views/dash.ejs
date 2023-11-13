@@ -1,0 +1,25 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager - Register</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+  <h1>Welcome to Task Manager, <%= username %>!</h1>
+  <h2>Welcome to your Dashboard, <%= username %>!</h2>
+  <form action="/searchTasks" method="GET">
+    <label for="search">Search Tasks:</label>
+    <input type="text" id="search" name="q" required>
+    <button type="submit">Search</button>
+  </form>
+  <p><a href="/tasks">View Tasks</a></p>
+  <p><a href="/createTask">Create Task</a></p>
+  <p><a href="/logout">Logout</a></p>
+</body>
+
+</html>
