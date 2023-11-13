@@ -1,15 +1,9 @@
 # Task Manager App
 
-## Group: [Your Group Number]
-### Members:
-- XX (00000000)
-- YY (00000100)
-
 Application Link: [Your Application Link](https://your-app-render-url.com/)
 
 ---
 
-## Login
 To access the Task Manager App, users need to log in by entering their username and password.
 
 Each user has a userID and password:
