@@ -11,13 +11,9 @@ Application Link: https://s381f-taskmanager.onrender.com/
 User Authentication
 To access the Task Manager App, users need to register before log in by entering their username and password.
 
-Each user has a userID and password:
-[
-	{ "userid": "user1", "password": "cs381" },
-	{ "userid": "user2", "password": "cs381" },
-	{ "userid": "user3", "password": "cs381" }
-]
-After a successful login, the userid is stored in the session.
+Each user has a unique userID and password:
+After a successful register, the username is stored in the session.
+Then user can login to their dashboard.
 
 Logout
 Users can log out of their accounts by clicking on the logout button on the dashboard page.
