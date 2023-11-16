@@ -24,7 +24,6 @@ A task document may contain the following attributes:
 Task Name  
 Task Description  
 Due Date  
-Task Name and Task Description are mandatory, and Due Date is optional.  
   
 The create operation is a POST request, and all information is in the body of the request.  
   
