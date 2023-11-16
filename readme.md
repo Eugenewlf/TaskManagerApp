@@ -11,13 +11,12 @@ Application Link: https://s381f-taskmanager.onrender.com/
 User Authentication: 
 To access the Task Manager App, users need to register before log in by entering their username and password.
 
-Each user has a unique userID and password:
-<<<<<<< HEAD
-After a successful register, the username is stored in the session. Then user can login to their dashboard..
-=======
+Each user has a unique username and password:
+After a successful register, the username is stored in the session. Then user can login to their dashboard
+
 After a successful register, the username is stored in the session.
-Then user can login to their dashboard.
->>>>>>> 946e1d0e8ff44d82e031d70fef111f68451c9a23
+Then user can log in to their dashboard.
+
 
 Logout
 Users can log out of their accounts by clicking on the logout button on the dashboard page.
@@ -34,9 +33,9 @@ Task Name and Task Description are mandatory, and Due Date is optional.
 The create operation is a POST request, and all information is in the body of the request.
 
 Read
-There are two options for reading and finding tasks: list all task or searching by task names.
+There are two options for reading and finding tasks: list all tasks or search by task names.
 
-List all Task:
+List all Tasks:
 Display all tasks.
 
 Searching by task name:
