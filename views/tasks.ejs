@@ -30,7 +30,9 @@
           <p><%= task.description %></p>
           <p>Due Date: <%= task.dueDate.toISOString().split('T')[0] %></p>
 
-          <a href="/updateTask/<%= task._id %>">Update</a>
+          <form action="/updateTask/<%= task._id %>" method="GET" style="display: inline;">
+            <button type="submit">Update</button>
+          </form>
 
           <form action="/deleteTask/<%= task._id %>" method="POST" style="display:inline;">
             <button type="submit">Delete</button>
