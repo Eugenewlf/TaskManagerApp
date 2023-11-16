@@ -66,12 +66,17 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
+  if (!username || !password) {
+    return res.status(400).send('Username and password are required');
+  }
+
   try {
     const existingUser = await req.userDb.findOne({ username });
 
     if (existingUser) {
       console.log('Username already exists. Choose a different one.');
-      return res.redirect('/register');
+      //return res.redirect('/register');
+      return res.status(400).send('Username already exists. Choose a different one.');
     }
 
     const hashedPassword = bcrypt.hashSync(password, saltRounds);
