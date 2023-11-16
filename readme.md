@@ -87,8 +87,8 @@ curl -i -X POST -b "session=your_session_token; session.sig=session_significant"
 
 
 For all RESTful CRUD services, registration should be done first. ..
-*Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.*..
-*Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.*..
-*Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.*..
-*"your_session_token" "session_significant" can be found when login is successful.*..
-*"your_task_id" can be found when successfully searching the task.*..
+*Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.*  
+*Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.*  
+*Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.*  
+*"your_session_token" "session_significant" can be found when login is successful.*  
+*"your_task_id" can be found when successfully searching the task.*  
