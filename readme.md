@@ -9,10 +9,10 @@ Application Link: https://s381f-taskmanager.onrender.com/
 ********************************************
 
 User Authentication: 
-To access the Task Manager App, users need to register before log in by entering their username and password.
+To access the Task Manager App, users need to register before login by entering their username and password.
 
-Each user has a unique userID and password:
-After a successful register, the username is stored in the session. Then user can login to their dashboard..
+Each user has a unique username and password:
+After a successful register, the username is stored in the session. Then the user can log in to their dashboard..
 
 Logout
 Users can log out of their accounts by clicking on the logout button on the dashboard page.
@@ -29,16 +29,16 @@ Task Name and Task Description are mandatory, and Due Date is optional.
 The create operation is a POST request, and all information is in the body of the request.
 
 Read
-There are two options for reading and finding tasks: list all task or searching by task names.
+There are two options for reading and finding tasks: list all tasks or search by task names.
 
-List all Task:
+List all Tasks:
 Display all tasks.
 
 Searching by task name:
 Input the task name or description of the task you want to find.
 
 Update
-Users can update task information through the details interface. Task name cannot be changed.
+Users can update task information through the details interface. The task name cannot be changed.
 
 Delete
 Users can delete task information through the details interface.
@@ -86,9 +86,9 @@ curl -i -X POST -b "session=your_session_token; session.sig=session_significant"
 **Outcome:** Successfully deleted the specified task.
 
 
-For all RESTful CRUD services, Register should be done first. 
-*Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.*
-*Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.*
-*Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.*
-*"your_session_token" "session_significant" can be found when login successful.*
-*"your_task_id" can be found when successfully searching the task.*
+For all RESTful CRUD services, registration should be done first. ..
+*Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.*..
+*Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.*..
+*Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.*..
+*"your_session_token" "session_significant" can be found when login is successful.*..
+*"your_task_id" can be found when successfully searching the task.*..
