@@ -12,12 +12,7 @@ User Authentication:
 To access the Task Manager App, users need to register before log in by entering their username and password.
 
 Each user has a unique userID and password:
-<<<<<<< HEAD
 After a successful register, the username is stored in the session. Then user can login to their dashboard..
-=======
-After a successful register, the username is stored in the session.
-Then user can login to their dashboard.
->>>>>>> 946e1d0e8ff44d82e031d70fef111f68451c9a23
 
 Logout
 Users can log out of their accounts by clicking on the logout button on the dashboard page.
@@ -65,7 +60,6 @@ Path URL: /login
 Test:
 curl -i -X POST -H "Content-Type: application/json" -d "{\"username\":\"your_username\",\"password\":\"your_password\"}" http://localhost:3000/login
 
-<<<<<<< HEAD
 **Outcome:** Logged in successfully, receiving session tokens.
 
 - Task Creation:
@@ -93,14 +87,8 @@ curl -i -X POST -b "session=your_session_token; session.sig=session_significant"
 
 
 For all RESTful CRUD services, Register should be done first. 
-**Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.**
-**Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.**
-***Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.***
+*Replace "your_session_token" with "eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyaWQiOiI2NTU2NTM4ZTU4NDIwZTczY2MzZGIzOTcifQ==" for testing.*
+*Replace "session_significant" with "gfHe0jbHhHfcpa8JlLtMwjhcBqk" for testing.*
+*Replace "your_task_id" with "655654f158420e73cc3db3a5" for testing.*
 *"your_session_token" "session_significant" can be found when login successful.*
 *"your_task_id" can be found when successfully searching the task.*
-=======
-Used for deletion.
-Path URL: /api/tasks/:taskId
-Test: curl -X DELETE https://s381f-taskmanager.onrender.com/api/tasks/00000001
-For all RESTful CRUD services, login should be done first.
->>>>>>> 946e1d0e8ff44d82e031d70fef111f68451c9a23
